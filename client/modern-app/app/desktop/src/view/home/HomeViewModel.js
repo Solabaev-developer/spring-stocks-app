@@ -8,7 +8,9 @@ Ext.define('ModernApp.view.home.HomeViewModel', {
 		round: false,
 		disabled: false
 	},
-
+	fields: [
+		'name', 'email', 'phone'
+	],
 	formulas: {
 		type: function(getter) {
 			return getter('buttonType.value');
