@@ -1,5 +1,7 @@
 package com.solabaev.springstocksapp.entity;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Date;
@@ -26,6 +28,7 @@ public class Stocks implements Serializable {
 
     private Double priceUsd;
 
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy HH:mm:ss")
     private Date date;
 
     private String name;

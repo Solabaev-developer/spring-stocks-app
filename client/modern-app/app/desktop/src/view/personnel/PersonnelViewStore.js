@@ -2,14 +2,13 @@ Ext.define('ModernApp.view.personnel.PersonnelViewStore', {
     extend: 'Ext.data.Store',
     alias: 'store.personnelviewstore',
     fields: [
-        'name', 'email', 'phone', 'dept'
+        'name', 'priceUsd', 'priceEur', 'priceRub', 'date'
     ],
-    groupField: 'dept',
     data: { items: [
-        { name: 'Jean Luc',   email: "jeanluc.picard@enterprise.com", phone: "555-111-1111", dept: "bridge" },
-        { name: 'ModernWorf', email: "worf.moghsson@enterprise.com",  phone: "555-222-2222", dept: "engine" },
-        { name: 'Deanna',     email: "deanna.troi@enterprise.com",    phone: "555-333-3333", dept: "bridge" },
-        { name: 'Data',       email: "mr.data@enterprise.com",        phone: "555-444-4444", dept: "bridge" }
+        { name: 'Jean Luc',   email: "jeanluc.picard@enterprise.com", phone: "555-111-1111"},
+        { name: 'ModernWorf', email: "worf.moghsson@enterprise.com",  phone: "555-222-2222"},
+        { name: 'Deanna',     email: "deanna.troi@enterprise.com",    phone: "555-333-3333"},
+        { name: 'Data',       email: "mr.data@enterprise.com",        phone: "555-444-4444"}
     ]},
     proxy: {
         type: 'memory',

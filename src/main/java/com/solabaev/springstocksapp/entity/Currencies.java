@@ -1,5 +1,7 @@
 package com.solabaev.springstocksapp.entity;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Date;
@@ -58,6 +60,7 @@ public class Currencies implements Serializable {
         return date;
     }
 
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy HH:mm:ss")
     public void setDate(Date date) {
         this.date = date;
     }

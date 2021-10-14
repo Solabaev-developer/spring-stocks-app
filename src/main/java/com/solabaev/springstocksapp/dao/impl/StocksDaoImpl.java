@@ -5,9 +5,11 @@ import org.hibernate.Transaction;
 import com.solabaev.springstocksapp.dao.StocksDao;
 import com.solabaev.springstocksapp.entity.Stocks;
 import com.solabaev.springstocksapp.util.HibernateSessionFactoryUtil;
+import org.springframework.stereotype.Component;
 
 import java.util.List;
 
+@Component
 public class StocksDaoImpl implements StocksDao {
 
     public Stocks findById(int id) {

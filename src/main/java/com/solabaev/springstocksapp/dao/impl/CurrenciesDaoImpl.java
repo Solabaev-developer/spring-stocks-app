@@ -1,14 +1,18 @@
 package com.solabaev.springstocksapp.dao.impl;
 
 import org.hibernate.Session;
+import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import com.solabaev.springstocksapp.dao.CurrenciesDao;
 import com.solabaev.springstocksapp.entity.Currencies;
 import com.solabaev.springstocksapp.util.HibernateSessionFactoryUtil;
+import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Repository;
 
 
 import java.util.List;
 
+@Repository
 public class CurrenciesDaoImpl implements CurrenciesDao {
 
     public Currencies findById(int id) {

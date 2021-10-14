@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:type="http://www.w3.org/1999/xhtml" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Текущий курс</title>
+</head>
+
+<body>
+<div th:each="obj : ${currencies}">
+     <div th:text="${obj}"></div>
+</div>
+</body>
+</html>
