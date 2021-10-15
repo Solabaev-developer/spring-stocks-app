@@ -8,14 +8,22 @@ Ext.define('ModernApp.view.home.HomeView', {
         'Ext.layout.HBox',
         'Ext.Button',
         'Ext.Panel',
-        'ModernApp.view.home.Store'
+        'ModernApp.view.home.Store',
+        'ModernApp.view.home.Window',
+        'ModernApp.view.home.FormBase'
     ],
-    plugins: [{
-        type: 'grideditable'
-    }],
+/*    listeners: {
+        dblclick: 'doItemDblClick'
+    },*/
     extend: 'Ext.grid.Grid',
     scrollable: true,
     store: {type: 'homegridstore'},
+    listeners: {
+        childdoubletap: 'editHeadRow'
+        },
+    bind: {
+        selection: '{item.selected}'
+    },
     items: [{
         xtype: 'panel',
         title: 'Текущий курс валют',
