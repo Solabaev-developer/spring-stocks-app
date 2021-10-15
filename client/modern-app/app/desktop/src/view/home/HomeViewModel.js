@@ -3,7 +3,6 @@ Ext.define('ModernApp.view.home.HomeViewModel', {
 	alias: 'viewmodel.homeviewmodel',
 
 	fields: [
-		{ name: 'id'},
 		{ name: 'date'},
 		{ name: 'usd'},
 		{ name: 'eur'}

@@ -10,8 +10,7 @@ import java.util.Date;
 @Table(name = "currencies")
 public class Currencies implements Serializable {
 
-    public Currencies(Integer id, Double usd, Double eur, Date date) {
-        this.id = id;
+    public Currencies(Double usd, Double eur, Date date) {
         this.usd = usd;
         this.eur = eur;
         this.date = date;
@@ -31,15 +30,16 @@ public class Currencies implements Serializable {
 
     }
 
-    public void setId(Integer id) {
-        this.id = id;
-    }
-
-    @Id
+    @Column(name = "id")
     public Integer getId() {
         return id;
     }
 
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
+    @Column(name = "usd")
     public Double getUsd() {
         return usd;
     }
@@ -48,6 +48,7 @@ public class Currencies implements Serializable {
         this.usd = usd;
     }
 
+    @Column(name = "eur")
     public Double getEur() {
         return eur;
     }
@@ -56,6 +57,7 @@ public class Currencies implements Serializable {
         this.eur = eur;
     }
 
+    @Column(name = "date")
     public Date getDate() {
         return date;
     }

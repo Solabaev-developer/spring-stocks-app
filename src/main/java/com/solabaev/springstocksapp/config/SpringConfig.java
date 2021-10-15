@@ -8,15 +8,15 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.servlet.config.annotation.*;
 
 import java.io.IOException;
 
 @Configuration
 @ComponentScan("com.solabaev.springstocksapp")
-@EnableWebMvc
 public class SpringConfig implements WebMvcConfigurer {
-    @Value("https://investfunds.ru/etf/1/")
+    @Value("https://investfunds.ru/indicators/currency/")
     private String url;
     private final ApplicationContext applicationContext;
 
@@ -39,6 +39,7 @@ public class SpringConfig implements WebMvcConfigurer {
     public void addViewControllers(ViewControllerRegistry registry) {
         registry.addViewController("/homeview").setViewName("homeview");
     }
+
 
     /*@Bean
     public SpringResourceTemplateResolver templateResolver() {

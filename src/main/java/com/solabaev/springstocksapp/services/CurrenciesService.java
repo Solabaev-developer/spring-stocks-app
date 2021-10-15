@@ -10,7 +10,7 @@ import java.util.List;
 @Service
 public class CurrenciesService {
 
-    public CurrenciesService() {
+    /*public CurrenciesService() {
     }
 
     private CurrenciesDaoImpl currenciesDao = new CurrenciesDaoImpl();
@@ -33,5 +33,5 @@ public class CurrenciesService {
 
     public List<Currencies> findAllCurrencies() {
         return currenciesDao.findAll();
-    }
+    }*/
 }
