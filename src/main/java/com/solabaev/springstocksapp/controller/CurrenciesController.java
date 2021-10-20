@@ -1,23 +1,16 @@
 package com.solabaev.springstocksapp.controller;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.solabaev.springstocksapp.build.CurrenciesBuilder;
-import com.solabaev.springstocksapp.dao.CurrenciesDao;
 import com.solabaev.springstocksapp.dao.impl.CurrenciesDaoImpl;
+import com.solabaev.springstocksapp.dto.CurrenciesDto;
 import com.solabaev.springstocksapp.entity.Currencies;
 import com.solabaev.springstocksapp.services.CurrenciesService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.MediaType;
-import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-import java.awt.*;
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.List;
 
 @CrossOrigin(origins = "http://localhost:1963/", maxAge = 3600, allowedHeaders = "*")
@@ -43,7 +36,7 @@ public class CurrenciesController implements Serializable {
             method = {RequestMethod.GET},
             produces = {"application/json"}
     )
-        public List<Currencies> getAllCurrencies() {
+    public List<Currencies> getAllCurrencies() {
         return dao.findAll();
     }
 
@@ -74,5 +67,19 @@ public class CurrenciesController implements Serializable {
     public void addCurrencies() {
         Currencies currencies = currenciesBuilder.getCurrencies();
         dao.save(currencies);
+    }
+
+    @RequestMapping(
+            value = {"/update/{id}"},
+            method = {RequestMethod.PUT},
+            produces = {"application/json"}
+    )
+    public void updateCurrencies(@RequestBody CurrenciesDto dto, @PathVariable Integer id) {
+        Currencies currencies = new Currencies();
+        currencies.setId(id);
+        currencies.setDate(dto.getDate());
+        currencies.setUsd(dto.getUsd());
+        currencies.setEur(dto.getEur());
+        dao.update(currencies);
     }
 }

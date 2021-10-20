@@ -3,6 +3,7 @@ package com.solabaev.springstocksapp.config;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
@@ -18,15 +19,14 @@ import java.io.IOException;
 public class SpringConfig implements WebMvcConfigurer {
     @Value("https://investfunds.ru/indicators/currency/")
     private String url;
-    private final ApplicationContext applicationContext;
 
     @Autowired
     public SpringConfig(ApplicationContext applicationContext) {
-        this.applicationContext = applicationContext;
     }
 
     @Bean
-    public Document getDocument() {
+    @Qualifier("documentCurrencies")
+    public Document getDocumentCurrencies() {
         Document document = null;
         try {
             document = Jsoup.connect(url).get();

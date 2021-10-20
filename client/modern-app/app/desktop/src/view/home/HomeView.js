@@ -10,7 +10,8 @@ Ext.define('ModernApp.view.home.HomeView', {
         'Ext.Panel',
         'ModernApp.view.home.Store',
         'ModernApp.view.home.Window',
-        'ModernApp.view.home.FormBase'
+        'ModernApp.view.home.FormBase',
+        'ModernApp.view.home.HomeViewModel'
     ],
 /*    listeners: {
         dblclick: 'doItemDblClick'
@@ -49,13 +50,12 @@ Ext.define('ModernApp.view.home.HomeView', {
             handler: 'addRow',
         },]
     }],
-
     columns: [{
-        text: 'Дата', dataIndex: 'date', editable: true, flex:1
+        text: 'Дата', dataIndex: 'date', editable: true, width: 200
     }, {
-        text: 'USD', dataIndex: 'usd', editable: true, flex:1
+        text: 'USD', dataIndex: 'usd', editable: true, width: 200
     }, {
-        text: 'Eur', dataIndex: 'eur', editable: true, flex:1
+        text: 'Eur', dataIndex: 'eur', editable: true, width: 200
     }]
 
 

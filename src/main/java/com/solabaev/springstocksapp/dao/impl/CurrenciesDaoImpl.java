@@ -1,15 +1,19 @@
 package com.solabaev.springstocksapp.dao.impl;
 
+import org.hibernate.SQLQuery;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import com.solabaev.springstocksapp.dao.CurrenciesDao;
 import com.solabaev.springstocksapp.entity.Currencies;
 import com.solabaev.springstocksapp.util.HibernateSessionFactoryUtil;
+import org.hibernate.query.Query;
+import org.springframework.beans.propertyeditors.CurrencyEditor;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Repository;
 
 
+import java.sql.Date;
 import java.util.List;
 
 @Repository
@@ -44,7 +48,20 @@ public class CurrenciesDaoImpl implements CurrenciesDao {
     }
 
     public List<Currencies> findAll() {
-        List<Currencies> Currencies = (List<Currencies>)HibernateSessionFactoryUtil.getSessionFactory().openSession().createQuery("From Currencies").list();
-        return Currencies;
+        List<Currencies> currencies = (List<Currencies>)HibernateSessionFactoryUtil.getSessionFactory().openSession().createQuery("From Currencies").list();
+        return currencies;
+    }
+
+    public Currencies getMaxCurrencies() {
+        String sql = "select * from currencies where id = (select max(id) from currencies)";
+        SQLQuery query = HibernateSessionFactoryUtil.getSessionFactory().openSession().createSQLQuery(sql);
+        List<Object[]> rows = query.list();
+        Integer id;
+        Currencies currencies = new Currencies();
+        for(Object[] row : rows){
+            id = ((Integer) row[3]);
+            currencies = HibernateSessionFactoryUtil.getSessionFactory().openSession().get(Currencies.class, id);
+        }
+        return currencies;
     }
 }

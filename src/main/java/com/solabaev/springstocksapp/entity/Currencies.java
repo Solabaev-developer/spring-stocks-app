@@ -62,7 +62,7 @@ public class Currencies implements Serializable {
         return date;
     }
 
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy HH:mm:ss")
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy")
     public void setDate(Date date) {
         this.date = date;
     }

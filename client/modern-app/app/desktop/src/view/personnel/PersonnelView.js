@@ -5,6 +5,7 @@ Ext.define('ModernApp.view.personnel.PersonnelView', {
     controller: {type: 'personnelviewcontroller'},
     viewModel: {type: 'personnelviewmodel'},
     store: {type: 'personnelviewstore'},
+    id: 'personnelView',
     items: [{
         xtype: 'panel',
         title: 'Биржевые инвестиционные фонды',
@@ -17,11 +18,13 @@ Ext.define('ModernApp.view.personnel.PersonnelView', {
         width: 400,
         ui: 'raised',
         docked: 'top',
+        id: 'addRowField',
         placeholder: 'Вставьте ссылку',
         style: {
             'padding-left': '15px',
             'padding-top': '5px'
-        }
+        },
+        bind: { value: '{stocksAdd}' }
     }, {
         xtype: 'container',
         cls: 'button',
@@ -39,6 +42,7 @@ Ext.define('ModernApp.view.personnel.PersonnelView', {
             margin: '5 5 5 15',
             text: 'Добавить',
             ui: 'action',
+            handler: 'addRow'
         }]
     },
     ],

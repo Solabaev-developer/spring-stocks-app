@@ -13,8 +13,7 @@ public class Stocks implements Serializable {
     public Stocks() {
     }
 
-    public Stocks(Integer id, Double priceUsd, Date date, String name, Double priceRub, Double priceEur) {
-        this.id = id;
+    public Stocks(Double priceUsd, Date date, String name, Double priceRub, Double priceEur) {
         this.priceUsd = priceUsd;
         this.date = date;
         this.name = name;
@@ -28,7 +27,7 @@ public class Stocks implements Serializable {
 
     private Double priceUsd;
 
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy HH:mm:ss")
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy")
     private Date date;
 
     private String name;
@@ -41,7 +40,7 @@ public class Stocks implements Serializable {
         this.id = id;
     }
 
-    @Id
+    @Column(name = "id")
     public Integer getId() {
         return id;
     }

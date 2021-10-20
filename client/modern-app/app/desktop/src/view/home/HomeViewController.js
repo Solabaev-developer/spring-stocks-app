@@ -6,36 +6,56 @@ Ext.define('ModernApp.view.home.HomeViewController', {
     addRow: function () {
         Ext.Ajax.request({
             url: 'http://localhost:8082/currencies/add',
-            method: 'GET'
+            method: 'GET',
+            timeout: 300000,
         })
+        Ext.getCmp('homeGrid').getStore().reload();
         Ext.getCmp('homeGrid').getStore().reload()
     },
 
-    deleteRow: function () {
-        var store = Ext.getCmp('homeGrid').getStore(),
-            grid = Ext.getCmp('homeGrid'),
-            sm = grid.getSelectionModel(),
-            cp = sm.getCurrentPosition();
-        if (!Ext.isEmpty(cp)) {
-            var index = cp.rowIdx;
-            store.removeAt(index);
-        }
+    onDelete: function () {
+        var selection = this.getSelectedModel();
+        Ext.Msg.show({
+            scope: this,
+            title: 'Удалить?',
+            message: 'Вы действительно хотите удалить запись?',
+            buttons: [{
+                text: "Да",
+                itemId: 'ok'
+            }, {
+                text: "Нет",
+                itemId: 'cancel'
+            }],
+            icon: Ext.Msg.QUESTION,
+            fn: function (btn) {
+                if (btn === 'ok') {
+                    var store = Ext.getCmp('homeGrid').getStore();
+                    store.remove(selection);
+                    this.showForm(false);
+                    Ext.Ajax.request({
+                        url: 'http://localhost:8082/currencies/delete/'+ selection.data.id,
+                        method: 'DELETE',
+                        timeout: 300000,
+                    })
+                }
+            }
+        });
     },
 
     editHeadRow: function (list, location, eOpts) {
         var model = this.getSelectedModel();
-        debugger;
-        console.log(model);
-        this.getViewModel().set('currencies.item', model);
         this.showForm(true);
+        Ext.getCmp('date').setValue(model.get('date'));
+        Ext.getCmp('usd').setValue(model.get('usd'));
+        Ext.getCmp('eur').setValue(model.get('eur'));
     },
 
-    showForm: function(isShow) {
+    showForm: function (isShow) {
         var window = Ext.getCmp('configWindow');
 
         if (Ext.isEmpty(window)) {
             window = Ext.create('ModernApp.view.home.Window', {
-                controller: this
+                controller: this,
             })
         }
         if (isShow)
@@ -45,10 +65,42 @@ Ext.define('ModernApp.view.home.HomeViewController', {
     },
 
     getSelectedModel: function () {
-        return this.getViewModel().get('item.selected').clone();
+        return Ext.getCmp('homeGrid').getViewModel().get('item.selected').clone();
     },
 
     onCancel: function () {
         this.showForm(false);
+        this.setModel(null);
     },
+
+    setModel: function (model) {
+        return Ext.getCmp('homeGrid').getViewModel().set('currencies.item', model);
+    },
+
+    onSave: function () {
+        var selection = this.getSelectedModel();
+        var items = Ext.getCmp('configWindow').getItems().items[0].items;
+        var date = items.map.date.rawValue;
+        var id = selection.data.id;
+        var usd = items.map.usd.rawValue;
+        var eur = items.map.eur.rawValue;
+        Ext.Ajax.request({
+            url: 'http://localhost:8082/currencies/update/' + id,
+            method: 'PUT',
+            timeout: 300000,
+            jsonData: {
+                id: id,
+                date: date,
+                usd: usd,
+                eur: eur,
+            },
+            success: function (){
+                console.log('Успешно');
+            },
+            failure: function(){console.log('failure');}
+        })
+        this.showForm(false);
+        Ext.getCmp('homeGrid').getStore().reload()
+    },
+
 });

@@ -1,11 +1,7 @@
 package com.solabaev.springstocksapp.services;
 
 
-import com.solabaev.springstocksapp.dao.impl.CurrenciesDaoImpl;
-import com.solabaev.springstocksapp.entity.Currencies;
 import org.springframework.stereotype.Service;
-
-import java.util.List;
 
 @Service
 public class CurrenciesService {

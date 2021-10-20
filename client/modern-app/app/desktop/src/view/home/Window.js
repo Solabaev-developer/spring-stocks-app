@@ -2,8 +2,10 @@ Ext.define('ModernApp.view.home.Window', {
     extend: 'Ext.window.Window',
     xtype: 'homeview-window',
     id: 'configWindow',
+    viewModel: {type: 'homeviewmodel'},
     requires: [
-        'ModernApp.view.home.FormBase'
+        'ModernApp.view.home.FormBase',
+        'ModernApp.view.home.HomeViewModel'
     ],
     height: 330,
     width: 550,
@@ -13,5 +15,5 @@ Ext.define('ModernApp.view.home.Window', {
     floating: true,
     closable: false,
     closeAction: 'hide',
-    items: { xtype: 'homeview-form' }
+    items: { xtype: 'homeview-form', id: 'form' }
 });

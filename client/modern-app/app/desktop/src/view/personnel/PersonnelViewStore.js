@@ -1,20 +1,16 @@
 Ext.define('ModernApp.view.personnel.PersonnelViewStore', {
     extend: 'Ext.data.Store',
     alias: 'store.personnelviewstore',
-    fields: [
-        'name', 'priceUsd', 'priceEur', 'priceRub', 'date'
-    ],
-    data: { items: [
-        { name: 'Jean Luc',   email: "jeanluc.picard@enterprise.com", phone: "555-111-1111"},
-        { name: 'ModernWorf', email: "worf.moghsson@enterprise.com",  phone: "555-222-2222"},
-        { name: 'Deanna',     email: "deanna.troi@enterprise.com",    phone: "555-333-3333"},
-        { name: 'Data',       email: "mr.data@enterprise.com",        phone: "555-444-4444"}
-    ]},
+    autoLoad: true,
+    storeId: 'stocksStore',
     proxy: {
-        type: 'memory',
+        type: 'rest',
+        url: 'http://localhost:8082/stocks/all',
         reader: {
             type: 'json',
-            rootProperty: 'items'
-        }
+            rootProperty: 'data'
+        },
+        headers: {'Content-Type': "text/plain" },
+        useDefaultXhrHeader: false
     }
 });
