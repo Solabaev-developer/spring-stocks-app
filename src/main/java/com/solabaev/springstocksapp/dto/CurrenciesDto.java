@@ -12,6 +12,7 @@ public class CurrenciesDto {
 
     private Double eur;
 
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy")
     private Date date;
 
     public Integer getId() {
@@ -38,7 +39,6 @@ public class CurrenciesDto {
         this.eur = eur;
     }
 
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy")
     public Date getDate() {
         return date;
     }

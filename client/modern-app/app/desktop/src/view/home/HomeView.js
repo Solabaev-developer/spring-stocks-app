@@ -13,9 +13,6 @@ Ext.define('ModernApp.view.home.HomeView', {
         'ModernApp.view.home.FormBase',
         'ModernApp.view.home.HomeViewModel'
     ],
-/*    listeners: {
-        dblclick: 'doItemDblClick'
-    },*/
     extend: 'Ext.grid.Grid',
     scrollable: true,
     store: {type: 'homegridstore'},

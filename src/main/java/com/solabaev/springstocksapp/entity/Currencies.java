@@ -24,6 +24,7 @@ public class Currencies implements Serializable {
 
     private Double eur;
 
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy")
     private Date date;
 
     public Currencies() {
@@ -61,8 +62,6 @@ public class Currencies implements Serializable {
     public Date getDate() {
         return date;
     }
-
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy")
     public void setDate(Date date) {
         this.date = date;
     }

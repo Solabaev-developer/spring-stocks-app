@@ -49,6 +49,9 @@ public class CurrenciesDaoImpl implements CurrenciesDao {
 
     public List<Currencies> findAll() {
         List<Currencies> currencies = (List<Currencies>)HibernateSessionFactoryUtil.getSessionFactory().openSession().createQuery("From Currencies").list();
+        for (Currencies c : currencies) {
+            System.out.println(c.getDate());
+        }
         return currencies;
     }
 

@@ -6,6 +6,15 @@ Ext.define('ModernApp.view.personnel.PersonnelView', {
     viewModel: {type: 'personnelviewmodel'},
     store: {type: 'personnelviewstore'},
     id: 'personnelView',
+    listeners: {
+        childdoubletap: 'editHeadRow'
+    },
+    bind: {
+        selection: '{item.selected}'
+    },
+    plugins: {
+        gridfilters: true
+    },
     items: [{
         xtype: 'panel',
         title: 'Биржевые инвестиционные фонды',
@@ -24,7 +33,7 @@ Ext.define('ModernApp.view.personnel.PersonnelView', {
             'padding-left': '15px',
             'padding-top': '5px'
         },
-        bind: { value: '{stocksAdd}' }
+        bind: {value: '{stocksAdd}'}
     }, {
         xtype: 'container',
         cls: 'button',
@@ -43,6 +52,39 @@ Ext.define('ModernApp.view.personnel.PersonnelView', {
             text: 'Добавить',
             ui: 'action',
             handler: 'addRow'
+        }, {
+            text: 'Фильтры',
+            margin: '5 5 5 15',
+            tooltip: 'Show filter data for the store',
+            handler: 'onShowFilters',
+            ui: 'action'
+        }, {
+            text: 'Очистить фильтры',
+            margin: '5 5 5 15',
+            tooltip: 'Clear all filters',
+            handler: 'onClearFilters',
+            ui: 'action'
+        }]
+    }, {
+        xtype: 'container',
+        docked: 'top',
+        layout: {
+            type: 'vbox'
+        },
+        bind: {hidden: '{showFilter}'},
+        items: [{
+            xtype: 'textfield',
+            width: 300,
+            ui: 'raised',
+            placeholder: 'Введите наименование',
+            bind: { value: '{filterName}'},
+            listeners: {
+                specialKey: 'pressEnter',
+            },
+            style: {
+                'padding-left': '15px',
+                'padding-top': '5px'
+            }
         }]
     },
     ],
@@ -75,7 +117,7 @@ Ext.define('ModernApp.view.personnel.PersonnelView', {
         },
         {
             text: 'Дата обновления',
-            dataIndex: 'date',
+            dataIndex: 'dateUpd',
             editable: true,
             width: 150
         }

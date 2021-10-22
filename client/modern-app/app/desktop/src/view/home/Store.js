@@ -8,7 +8,7 @@ Ext.define('ModernApp.view.home.Store', {
         url: 'http://localhost:8082/currencies/all',
         reader: {
             type: 'json',
-            rootProperty: 'data'
+            rootProperty: 'data',
         },
         headers: {'Content-Type': "text/plain" },
         useDefaultXhrHeader: false

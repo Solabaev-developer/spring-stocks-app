@@ -3,14 +3,14 @@ Ext.define('ModernApp.view.home.HomeViewController', {
     alias: 'controller.homeviewcontroller',
     requires: 'ModernApp.view.home.HomeViewModel',
 
-    addRow: function () {
+    addRow: async function () {
         Ext.Ajax.request({
             url: 'http://localhost:8082/currencies/add',
             method: 'GET',
             timeout: 300000,
         })
+        await this.sleep(100);
         Ext.getCmp('homeGrid').getStore().reload();
-        Ext.getCmp('homeGrid').getStore().reload()
     },
 
     onDelete: function () {
@@ -77,7 +77,7 @@ Ext.define('ModernApp.view.home.HomeViewController', {
         return Ext.getCmp('homeGrid').getViewModel().set('currencies.item', model);
     },
 
-    onSave: function () {
+    onSave: async function () {
         var selection = this.getSelectedModel();
         var items = Ext.getCmp('configWindow').getItems().items[0].items;
         var date = items.map.date.rawValue;
@@ -100,7 +100,20 @@ Ext.define('ModernApp.view.home.HomeViewController', {
             failure: function(){console.log('failure');}
         })
         this.showForm(false);
+        await this.sleep(1000);
         Ext.getCmp('homeGrid').getStore().reload()
     },
+
+    sleep: function (ms) {
+        return new Promise(resolve => setTimeout(resolve, ms))
+    },
+
+    loadMask: function () {
+        var myMask = new Ext.LoadMask({
+            msg    : 'Please wait...',
+            target : myPanel
+        });
+        return myMask;
+    }
 
 });

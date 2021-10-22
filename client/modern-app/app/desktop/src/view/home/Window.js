@@ -14,6 +14,6 @@ Ext.define('ModernApp.view.home.Window', {
     modal: true,
     floating: true,
     closable: false,
-    closeAction: 'hide',
-    items: { xtype: 'homeview-form', id: 'form' }
+    closeAction: 'destroy',
+    items: { xtype: 'homeview-form', id: 'ConfigForm' }
 });

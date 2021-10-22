@@ -4,16 +4,8 @@ Ext.define('ModernApp.Application', {
 	requires: ['ModernApp.*'],
 	defaultToken: 'homeview',
 
-	removeSplash: function () {
-		Ext.getBody().removeCls('launching')
-		var elem = document.getElementById("splash")
-		elem.parentNode.removeChild(elem)
-	},
-
 	launch: function () {
-		this.removeSplash()
-		var whichView = 'mainview'
-		Ext.Viewport.add([{xtype: whichView}])
+		Ext.Viewport.add([{xtype: 'mainview'}])
 	},
 
 	onAppUpdate: function () {

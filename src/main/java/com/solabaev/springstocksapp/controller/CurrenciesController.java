@@ -11,6 +11,9 @@ import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
 import java.io.Serializable;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 @CrossOrigin(origins = "http://localhost:1963/", maxAge = 3600, allowedHeaders = "*")
@@ -37,7 +40,8 @@ public class CurrenciesController implements Serializable {
             produces = {"application/json"}
     )
     public List<Currencies> getAllCurrencies() {
-        return dao.findAll();
+        List<Currencies> list = dao.findAll();
+        return list;
     }
 
     @RequestMapping(

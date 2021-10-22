@@ -1,16 +1,19 @@
-Ext.define('ModernApp.view.home.FormBase', {
-    xtype: 'homeview-form',
-    id: 'configForm',
+Ext.define('ModernApp.view.personnel.FormBase', {
+    xtype: 'personnel-form',
+    id: 'personnelForm',
     extend: 'Ext.form.Panel',
     modelValidation: true,
-    viewModel: {type: 'homeviewmodel'},
+    viewModel: {type: 'personnelviewmodel'},
     bodyPadding: 10,
+    controller: 'personnelviewcontroller',
     scrollable: 'y',
     layout: {
         type: 'vbox',
         align: 'stretch'
     },
-    requires: ['ModernApp.view.home.HomeViewModel'],
+    requires: [
+        'ModernApp.view.personnel.PersonnelViewModel',
+        'ModernApp.view.personnel.PersonnelViewController'],
     defaults: {
         labelWidth: 110
     },
@@ -18,25 +21,36 @@ Ext.define('ModernApp.view.home.FormBase', {
         text: 'Дата'
     }, {
         xtype: 'textfield',
-        id: 'date',
+        id: 'name',
         editable: true,
-        bind: { value: '{currencies.item.date}' }
+
     }, {
         xtype: 'textfield',
-        id: 'usd',
+        id: 'priceUsd',
         editable: true,
-        bind: { value: '{currencies.item.usd}' }
+
     }, {
         xtype: 'textfield',
-        id: 'eur',
+        id: 'priceEur',
         editable: true,
-        bind: { value: '{currencies.item.eur}' }
+
+    }, {
+        xtype: 'textfield',
+        id: 'priceRub',
+        editable: true,
+
+    }, {
+        xtype: 'textfield',
+        id: 'dateUpd',
+        editable: true,
+
     }],
     buttons: [{
         text: 'Сохранить',
         handler: 'onSave'
     }, {
         text: 'Удалить',
+        id: 'delete',
         handler: 'onDelete'
     }, {
         text: 'Закрыть',

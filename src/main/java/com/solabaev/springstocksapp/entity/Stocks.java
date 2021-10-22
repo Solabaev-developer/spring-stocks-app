@@ -1,6 +1,8 @@
 package com.solabaev.springstocksapp.entity;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import org.springframework.context.annotation.Bean;
+import org.springframework.stereotype.Component;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -8,17 +10,19 @@ import java.util.Date;
 
 @Entity
 @Table(name = "stocks")
+@Component
 public class Stocks implements Serializable {
 
     public Stocks() {
     }
 
-    public Stocks(Double priceUsd, Date date, String name, Double priceRub, Double priceEur) {
+    public Stocks(Double priceUsd, Date date, String name, Double priceRub, Double priceEur, String site) {
         this.priceUsd = priceUsd;
-        this.date = date;
+        this.dateUpd = date;
         this.name = name;
         this.priceRub = priceRub;
         this.priceEur = priceEur;
+        this.site = site;
     }
 
     @Id
@@ -28,13 +32,15 @@ public class Stocks implements Serializable {
     private Double priceUsd;
 
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy")
-    private Date date;
+    private Date dateUpd;
 
     private String name;
 
     private Double priceRub;
 
     private Double priceEur;
+
+    private String site;
 
     public void setId(Integer id) {
         this.id = id;
@@ -45,7 +51,7 @@ public class Stocks implements Serializable {
         return id;
     }
 
-    @Column(name = "price_usd")
+    @Column(name = "priceusd")
     public Double getPriceUsd() {
         return priceUsd;
     }
@@ -55,12 +61,12 @@ public class Stocks implements Serializable {
     }
 
     @Column(name = "date")
-    public Date getDate() {
-        return date;
+    public Date getDateUpd() {
+        return dateUpd;
     }
 
-    public void setDate(Date date) {
-        this.date = date;
+    public void setDateUpd(Date date) {
+        this.dateUpd = date;
     }
 
     @Column(name = "name")
@@ -72,7 +78,7 @@ public class Stocks implements Serializable {
         this.name = name;
     }
 
-    @Column(name = "price_rub")
+    @Column(name = "pricerub")
     public Double getPriceRub() {
         return priceRub;
     }
@@ -81,7 +87,7 @@ public class Stocks implements Serializable {
         this.priceRub = priceRub;
     }
 
-    @Column(name = "price_eur")
+    @Column(name = "priceeur")
     public Double getPriceEur() {
         return priceEur;
     }
@@ -90,12 +96,22 @@ public class Stocks implements Serializable {
         this.priceEur = priceEur;
     }
 
+    @Column(name = "site")
+    public String getSite() {
+        return site;
+    }
+
+    public void setSite(String site) {
+        this.site = site;
+    }
+
+
     @Override
     public String toString() {
         return "Stocks{" +
                 "id=" + id +
                 ", PriceUsd=" + priceUsd +
-                ", date=" + date +
+                ", date=" + dateUpd +
                 ", name='" + name + '\'' +
                 ", PriceRub=" + priceRub +
                 ", PriceEur=" + priceEur +

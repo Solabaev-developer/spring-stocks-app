@@ -1,0 +1,13 @@
+{
+  "properties": [
+    {
+      "name": "scheduler.delay",
+      "type": "java.lang.String",
+      "description": "Description for scheduler.delay."
+    },
+    {
+      "name": "scheduler.initialDelay",
+      "type": "java.lang.String",
+      "description": "Description for scheduler.delay."
+    }
+  ] }

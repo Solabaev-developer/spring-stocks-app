@@ -3,6 +3,7 @@ package com.solabaev.springstocksapp.controller;
 import com.solabaev.springstocksapp.build.StocksBuilder;
 import com.solabaev.springstocksapp.dao.impl.CurrenciesDaoImpl;
 import com.solabaev.springstocksapp.dao.impl.StocksDaoImpl;
+import com.solabaev.springstocksapp.dto.StocksDto;
 import com.solabaev.springstocksapp.dto.UrlDto;
 import com.solabaev.springstocksapp.entity.Stocks;
 import com.solabaev.springstocksapp.parcer.StocksParcer;
@@ -67,7 +68,22 @@ public class StocksController extends ResponseEntityExceptionHandler implements 
 
         StocksParcer parcer = new StocksParcer(dto.getUrl());
         StocksBuilder builder = new StocksBuilder(parcer, currenciesDao);
-        dao.save(builder.getCurrentStocks());
+        dao.save(builder.getCurrentStocks(dto));
+    }
+
+    @RequestMapping(
+            value = {"/update/{id}"},
+            method = {RequestMethod.PUT}
+    )
+    public void updateStocks(@RequestBody StocksDto dto, @PathVariable Integer id) {
+        Stocks stocks = new Stocks();
+        stocks.setId(id);
+        stocks.setDateUpd(dto.getDateUpd());
+        stocks.setPriceUsd(dto.getPriceUsd());
+        stocks.setPriceEur(dto.getPriceEur());
+        stocks.setName(dto.getName());
+        stocks.setPriceRub(dto.getPriceRub());
+        dao.update(stocks);
     }
 
 }
