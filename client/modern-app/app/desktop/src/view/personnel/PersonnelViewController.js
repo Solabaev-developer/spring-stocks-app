@@ -19,7 +19,8 @@ Ext.define('ModernApp.view.personnel.PersonnelViewController', {
             }
         })
         debugger;
-        await this.sleep(1500);
+        await this.sleep(1500).then(this.loadMask(true, 'personnelView'));
+        this.loadMask(false, 'personnelView');
         Ext.getCmp('personnelView').getStore().reload();
     },
 
@@ -106,7 +107,8 @@ Ext.define('ModernApp.view.personnel.PersonnelViewController', {
                 console.log(responce);
             }
         })
-        await this.sleep(1000);
+        await this.sleep(1000).then(this.loadMask(true, 'configWindow'));
+        this.loadMask(false, 'configWindow');
         this.showForm(false);
         Ext.getCmp('personnelView').getStore().reload()
     },
@@ -158,6 +160,17 @@ Ext.define('ModernApp.view.personnel.PersonnelViewController', {
 
         setModel: function (model) {
             return Ext.getCmp('personnelView').getViewModel().set('item', model);
+        },
+
+        loadMask: function (bool, elem) {
+            var window = Ext.getCmp(elem);
+            if(bool === true) {
+                window.setMasked({
+                    xtype: 'loadmask',
+                    message: 'Загрузка',
+                    indicator:true
+                })
+            } else window.setMasked(false);
         }
     }
 });

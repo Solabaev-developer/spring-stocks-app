@@ -99,21 +99,27 @@ Ext.define('ModernApp.view.home.HomeViewController', {
             },
             failure: function(){console.log('failure');}
         })
+        await this.sleep(1000).then(this.loadMask(true));
+        this.loadMask(false);
         this.showForm(false);
-        await this.sleep(1000);
         Ext.getCmp('homeGrid').getStore().reload()
     },
 
     sleep: function (ms) {
-        return new Promise(resolve => setTimeout(resolve, ms))
+        return new Ext.Promise(function (resolve, reject) {
+            setTimeout(resolve, ms);
+        })
     },
 
-    loadMask: function () {
-        var myMask = new Ext.LoadMask({
-            msg    : 'Please wait...',
-            target : myPanel
-        });
-        return myMask;
+    loadMask: function (bool) {
+        var window = Ext.getCmp('personnelWindow');
+        if(bool === true) {
+            window.setMasked({
+                xtype: 'loadmask',
+                message: 'Загрузка',
+                indicator:true
+            })
+        } else window.setMasked(false);
     }
 
 });
